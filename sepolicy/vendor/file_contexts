@@ -4,7 +4,7 @@
 /dev/mius(.*)?                        u:object_r:sound_device:s0
 
 # Battery
-/vendor/bin/batterysecret		u:object_r:batterysecret_exec:s0
+/(vendor|system/vendor)/bin/batterysecret u:object_r:batterysecret_exec:s0
 
 # Camera
 /mnt/vendor/persist/camera(/.*)?   u:object_r:camera_persist_file:s0
@@ -22,12 +22,26 @@
 /vendor/lib(64)?/rfsa/adsp/libsnpe_htp_v66_skel\.so u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/rfsa/adsp/libsnpe_htp_v68_skel\.so u:object_r:same_process_hal_file:s0
 
+# Displayfeature
+/vendor/bin/displayfeature                                              u:object_r:vendor_displayfeature_exec:s0
+/vendor/bin/hw/vendor\.xiaomi\.hardware\.displayfeature@1\.0-service    u:object_r:vendor_hal_displayfeature_xiaomi_default_exec:s0
+/dev/mi_display/disp_feature                                                                        u:object_r:graphics_device:s0
+
+# Mi_Disp
+/sys/devices/virtual/mi_display/disp_feature/disp-DSI-+[0-1](/.*)?	                                                             u:object_r:vendor_sysfs_graphics:s0
+
+# Dumpstate
+/vendor/bin/hw/android\.hardware\.dumpstate@1\.1-service\.xiaomi u:object_r:hal_dumpstate_xiaomi_exec:s0
+
+# Lights
+/vendor/bin/hw/android\.hardware\.light-service\.xiaomi                                    u:object_r:hal_light_default_exec:s0
+
 # IR
 /dev/lirc[0-9]+                                                    u:object_r:lirc_device:s0
 /vendor/bin/hw/android\.hardware\.ir-service\.xiaomi               u:object_r:hal_ir_default_exec:s0
 
 # Mlipay
-/(vendor|system/vendor)/bin/mlipayd@1.1          u:object_r:hal_mlipay_default_exec:s0
+/(vendor|system/vendor)/bin/mlipayd@1\.1          u:object_r:hal_mlipay_default_exec:s0
 
 # NFC
 /vendor/bin/hw/android\.hardware\.nfc-service\.nxp                 u:object_r:hal_nfc_default_exec:s0
@@ -47,16 +61,16 @@
 /vendor/bin/hw/vendor\.xiaomi\.hardware\.citsensorservice@1\.1-service                                  u:object_r:vendor_hal_citsensorservice_xiaomi_default_exec:s0
 
 # Fingerprint
-/dev/goodix_fp                                                      u:object_r:vendor_fingerprint_device:s0
-/mnt/vendor/persist/goodix(/.*)?                                    u:object_r:fingerprint_vendor_data_file:s0
-/data/vendor/fpc(/.*)?                                              u:object_r:fingerprint_vendor_data_file:s0
-/data/vendor/fpdump(/.*)?                                           u:object_r:fingerprint_vendor_data_file:s0
-/data/vendor/goodix(/.*)?                                           u:object_r:fingerprint_vendor_data_file:s0
-/vendor/bin/hw/android\.hardware\.biometrics\.fingerprint@2\.3-service\.xiaomi u:object_r:hal_fingerprint_default_exec:s0
-/sys/devices/platform/soc/soc:qcom,dsi-display-primary/fod_hbm      u:object_r:vendor_sysfs_udfps:s0
-/sys/devices/platform/soc/soc:qcom,dsi-display-primary/fod_ui       u:object_r:vendor_sysfs_udfps:s0
-/sys/devices/virtual/touch/tp_dev/fod_status                        u:object_r:vendor_sysfs_udfps:s0
-/sys/devices/virtual/touch/touch_dev/fod_press_status               u:object_r:vendor_sysfs_udfps:s0
+/vendor/bin/hw/android\.hardware\.biometrics\.fingerprint-service\.xiaomi                           u:object_r:hal_fingerprint_default_exec:s0
+/dev/goodix_fp                                                                                      u:object_r:vendor_fingerprint_device:s0
+/mnt/vendor/persist/goodix(/.*)?                                                                    u:object_r:fingerprint_vendor_data_file:s0
+/data/vendor/fpc(/.*)?                                                                              u:object_r:fingerprint_vendor_data_file:s0
+/data/vendor/fpdump(/.*)?                                                                           u:object_r:fingerprint_vendor_data_file:s0
+/data/vendor/goodix(/.*)?                                                                           u:object_r:fingerprint_vendor_data_file:s0
+
+# UDFPS
+/sys/devices/virtual/touch/touch_dev/fod_press_status                 u:object_r:vendor_sysfs_udfps:s0
+/sys/devices/platform/soc/soc:qcom,dsi-display-primary/dimlayer_hbm   u:object_r:vendor_sysfs_udfps:s0
 
 # Thermal
 /data/vendor/thermal(/.*)?                           u:object_r:thermal_data_file:s0
